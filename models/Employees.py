@@ -22,10 +22,43 @@ class EmployeesModel(db.Model):
     @classmethod
     def fetch_all_records(cls):
         return cls.query.all()
+
+    # check email
+    @classmethod
+    def check_existing_email(cls,email):
+        record = cls.query.filter_by(email = email).first()
+        return record
+    # check kra
+    @classmethod
+    def check_existing_kra(cls,kra):
+        record = cls.query.filter_by(kra_pin = kra).first()
+        return record
+
+
+
     #delete record
     @classmethod
     def delete_by_id(cls,id):
         record = cls.query.filter_by(employee_id = id)
         record.delete()
+        db.session.commit()
+        return True
+
+    #update details
+    @classmethod
+    def update_by_id(cls,id,name = None,email = None,kra = None,salary=None,benefits=None):
+        record = cls.query.filter_by(employee_id=id).first()
+
+        if name:
+            record.name = name
+        if email:
+            record.email = email
+        if kra:
+            record.kra_pin = kra
+        if salary:
+            record.basic_salary = salary
+        if benefits:
+            record.benefits = benefits
+
         db.session.commit()
         return True
