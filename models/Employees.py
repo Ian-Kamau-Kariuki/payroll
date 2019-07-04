@@ -1,16 +1,18 @@
 from app import db
 from datetime import datetime
+from models.Payrolls import PayrollsModel
 
 class EmployeesModel(db.Model):
     __tablename__ = 'employees'
     employee_id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(25),nullable=False)
+    # gender = db.Column(db.String(10),nullable=False)
     email = db.Column(db.String(25),unique=True,nullable=False)
     kra_pin = db.Column(db.String(25),unique=True,nullable=True)
     start_date = db.Column(db.DateTime,default=datetime.now())
     basic_salary = db.Column(db.Float(25), default=0)
     benefits = db.Column(db.Float(25), default=0)
-
+    Payrolls = db.relationship(PayrollsModel,backref = 'employees')
 
 
     #create method
@@ -62,3 +64,7 @@ class EmployeesModel(db.Model):
 
         db.session.commit()
         return True
+    #fetch by id
+    @classmethod
+    def fetch_by_id(cls,id):
+        return cls.query.filter_by(employee_id = id).first()

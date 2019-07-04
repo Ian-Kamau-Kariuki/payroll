@@ -13,3 +13,9 @@ class PayrollsModel(db.Model):
     pension = db.Column(db.Float(25))
     net_salary = db.Column(db.Float(25))
     employee_id = db.Column(db.Integer,db.ForeignKey('employees.employee_id'))
+
+
+    # insert record: instance method
+    def insert_record(self):
+        db.session.add(self)
+        db.session.commit()
