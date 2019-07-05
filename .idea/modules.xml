@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/../Tax_Caculator/.idea/Tax_Caculator.iml" filepath="$PROJECT_DIR$/../Tax_Caculator/.idea/Tax_Caculator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/payroll_system.iml" filepath="$PROJECT_DIR$/.idea/payroll_system.iml" />
-    </modules>
-  </component>
-</project>
