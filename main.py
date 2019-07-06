@@ -4,8 +4,8 @@ from config import Development,Production
 from resources.payroll_calculator import Employee
 
 app = Flask(__name__)
-app.config.from_object(Development)
-# app.config.from_object(Production)
+# app.config.from_object(Development)
+app.config.from_object(Production)
 
 db = SQLAlchemy(app)
 
