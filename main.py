@@ -2,10 +2,11 @@ from flask import Flask,render_template,request,redirect,url_for,flash
 from flask_sqlalchemy import SQLAlchemy
 from config import Development,Production
 from resources.payroll_calculator import Employee
+import pygal
 
 app = Flask(__name__)
-# app.config.from_object(Development)
-app.config.from_object(Production)
+app.config.from_object(Development)
+#app.config.from_object(Production)
 
 db = SQLAlchemy(app)
 
@@ -17,10 +18,35 @@ from models.Payrolls import PayrollsModel
 def create_tables():
     db.create_all()
 
+# @app.route('/auth')
+# def authenticate():
+#
+#     return render_template('Authentication.html')
 @app.route('/')
 def home():
     employees = EmployeesModel.fetch_all_records()
-    return render_template('index.html',wafanyikazi = employees)
+
+
+    male = 0
+    female = 0
+    na = 0
+    #use list comprehensions and count method to modify this for and if
+    for emp in employees:
+        if emp.gender == 'M':
+            male+=1
+        elif emp.gender =='F':
+            female +=1
+        else:
+            na +=1
+
+    pie_chart = pygal.Pie()
+    pie_chart.title = 'Male vs Female Employees'
+    pie_chart.add('Male Employees ', male)
+    pie_chart.add('Female Employees ', female)
+    pie_chart.add('Not Applicable ', na)
+    graph = pie_chart.render_data_uri()
+
+    return render_template('index.html',wafanyikazi = employees, graph =graph)
 
 # view payrolls
 @app.route('/payrolls/<int:id>')
@@ -58,6 +84,7 @@ def edit_employee(id):
 def create_new_employee():
     if request.method == "POST":
         name = request.form['name']
+        gender = request.form['gender']
         email = request.form['email']
         kra_pin = request.form['kra']
         basic_salary = request.form['basicsalary']
@@ -70,7 +97,7 @@ def create_new_employee():
 
 
         #create object of class EmployeesModel
-        emp = EmployeesModel(name = name,email=email,kra_pin=kra_pin,basic_salary=basic_salary,benefits=benefits)
+        emp = EmployeesModel(name = name,email=email,gender=gender,kra_pin=kra_pin,basic_salary=basic_salary,benefits=benefits)
         emp.insert_method()
         #redirect to home page
 

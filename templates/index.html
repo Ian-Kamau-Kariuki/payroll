@@ -32,6 +32,17 @@
     <label for="name">Employee Name</label>
     <input type="text" class="form-control" id="name" placeholder="Employee Name" required name="name">
   </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" id="gender" name="gender">
+                        <option value="N/A">N/A</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+
+            </div>
   <div class="form-group">
     <label for="email">Email</label>
     <input type="email" class="form-control" id="email" placeholder="Employee's Email Address" required name="email">
@@ -69,6 +80,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Employee's Name</th>
+      <th scope="col">Gender</th>
       <th scope="col">Email</th>
       <th scope="col">KRA Pin</th>
       <th scope="col">Start Date</th>
@@ -86,6 +98,7 @@
     <tr>
       <th scope="row">{{ each.employee_id }}</th>
       <td>{{ each.name }}</td>
+      <td>{{ each.gender }}</td>
       <td>{{ each.email }}</td>
       <td>{{ each.kra_pin }}</td>
       <td>{{ each.start_date }}</td>
@@ -184,5 +197,6 @@
 
   </tbody>
 </table>
+    <img src="{{ graph | safe }}",height = "100px"/>
 
 {% endblock content %}
