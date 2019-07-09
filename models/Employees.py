@@ -13,6 +13,7 @@ class EmployeesModel(db.Model):
     basic_salary = db.Column(db.Float(25), default=0)
     benefits = db.Column(db.Float(25), default=0)
     # user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    status = db.Column(db.Integer,default=0)
     Payrolls = db.relationship(PayrollsModel,backref = 'employees')
 
 
@@ -24,7 +25,7 @@ class EmployeesModel(db.Model):
     #Readd
     @classmethod
     def fetch_all_records(cls):
-        return cls.query.all()
+        return cls.query.filter_by(status=0)
 
     # check email
     @classmethod
@@ -42,8 +43,9 @@ class EmployeesModel(db.Model):
     #delete record
     @classmethod
     def delete_by_id(cls,id):
-        record = cls.query.filter_by(employee_id = id)
-        record.delete()
+        record = cls.query.filter_by(employee_id = id).first()
+        record.status=1
+
         db.session.commit()
         return True
 
