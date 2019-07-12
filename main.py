@@ -2,13 +2,15 @@ from flask import Flask,render_template,request,redirect,url_for,flash
 from flask_sqlalchemy import SQLAlchemy
 from config import Development,Production
 from resources.payroll_calculator import Employee
+from flask_migrate import Migrate
 import pygal
 
 app = Flask(__name__)
-# app.config.from_object(Development)
-app.config.from_object(Production)
+app.config.from_object(Development)
+# app.config.from_object(Production)
 
 db = SQLAlchemy(app)
+Migrate = Migrate(app,db)
 
 from models.Employees import EmployeesModel
 from models.Payrolls import PayrollsModel
