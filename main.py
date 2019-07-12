@@ -2,15 +2,18 @@ from flask import Flask,render_template,request,redirect,url_for,flash
 from flask_sqlalchemy import SQLAlchemy
 from config import Development,Production
 from resources.payroll_calculator import Employee
-from flask_migrate import Migrate
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
 import pygal
 
 app = Flask(__name__)
 app.config.from_object(Development)
-app.config.from_object(Production)
+# app.config.from_object(Production)
 
 db = SQLAlchemy(app)
 Migrate = Migrate(app,db)
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
 
 from models.Employees import EmployeesModel
 from models.Payrolls import PayrollsModel
@@ -138,5 +141,5 @@ def generate_payroll(uid):
     #     flash("Error in saving to the database")
     #     return redirect(url_for('payrolls', id=uid))
 
-# if __name__ == '__main__':
-#     app.run()
+if __name__ == '__main__':
+    manager.run()
