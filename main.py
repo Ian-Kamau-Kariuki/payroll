@@ -7,8 +7,8 @@ from flask_migrate import Migrate, MigrateCommand
 import pygal
 
 app = Flask(__name__)
-app.config.from_object(Development)
-# app.config.from_object(Production)
+# app.config.from_object(Development)
+app.config.from_object(Production)
 
 db = SQLAlchemy(app)
 Migrate = Migrate(app,db)
