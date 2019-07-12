@@ -117,13 +117,13 @@ def generate_payroll(uid):
 
     ya = Employee(basic,benefits)
     gross = ya.gross_salary
-    payee = ya.payee
-    nhif = ya.nhif
+    payee = ya.calc_payee()
+    nhif = ya.calc_NHIF()
     nssf = ya.nssf
     relief = 0
     sacco = 0
     pension = 0
-    netSalary = ya.net_salary
+    netSalary = ya.calc_net_salary()
     emp_id = uid
 
     pay = PayrollsModel(month=month,gross_salary=gross,payee=payee,nhif=nhif,nssf=nssf,personal_relief=relief,
