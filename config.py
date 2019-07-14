@@ -12,5 +12,5 @@ class Development(Config):
 
 class Production(Config):
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_DATABASE_URI = 'postgres://qglepwvjxcrxzr:9b860f71b592ab4c40fd61473eac46794382b29b3239355331cd75af8ac2eca4@ec2-23-21-160-38.compute-1.amazonaws.com:5432/d3av0ii8aftl43'
+    SQLALCHEMY_DATABASE_URI ='postgres://usptufuhuictjb:5f38304e99d83d22d6fc01ea580ae340ebac82bc681413a80fd52680a2a68dc5@ec2-174-129-29-101.compute-1.amazonaws.com:5432/ddneuur53ilu9d'
     DEBUG = False
