@@ -1,4 +1,4 @@
-from app import db
+from main import db
 
 class PayrollsModel(db.Model):
     __tablename__ = 'payrolls'
